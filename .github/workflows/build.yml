@@ -40,6 +40,7 @@ jobs:
       working-directory: src/CodeTest.UnitTest
       run: dotnet test CodeTest.UnitTest.csproj --no-build --verbosity normal /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=cobertura
     - name: Install reportgenerator tool
+      working-directory: src/CodeTest.UnitTest
       run: dotnet tool install dotnet-reportgenerator-globaltool
     - name: Generate code coverage Markdown report
       working-directory: src/CodeTest.UnitTest

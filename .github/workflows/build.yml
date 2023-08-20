@@ -37,5 +37,8 @@ jobs:
       run: dotnet build --no-restore
       working-directory: src/CodeTest
     - name: Test
+      id: test
       working-directory: src/CodeTest.UnitTest
       run: dotnet test CodeTest.UnitTest.csproj --no-build --verbosity normal /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=cobertura
+    - name: Test result
+      run: echo "${{ steps.test.outputs.content }}"

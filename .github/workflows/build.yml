@@ -38,7 +38,7 @@ jobs:
       working-directory: src/CodeTest
     - name: Test
       working-directory: src/CodeTest.UnitTest
-      run: dotnet test CodeTest.UnitTest.csproj --no-build --verbosity normal /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=cobertura
+      run: dotnet test CodeTest.UnitTest.csproj  /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=cobertura
     - name: Install reportgenerator tool
       working-directory: src/CodeTest.UnitTest
       run: dotnet tool install dotnet-reportgenerator-globaltool

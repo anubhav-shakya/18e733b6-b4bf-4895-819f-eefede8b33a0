@@ -2,11 +2,39 @@ namespace CodeTest.UnitTest
 {
     public class SequenceFinderTest
     {
+
+        [Fact]
+        public void FindSequence_WhereInputIsNull_ReturnsInvalidInput()
+        {
+            //Act
+            var res = SequenceFinder.FindSequence(null);
+
+            //Assert
+            Assert.Equal("invalid input", res);
+        }
+
+        [Fact]
+        public void FindSequence_WhereInputHasNoSequence_ReturnsNoSequenceFound()
+        {
+            //Act
+            var res = SequenceFinder.FindSequence("1 1");
+
+            //Assert
+            Assert.Equal("no sequence found", res);
+        }
+
+        [Fact]
+        public void FindSequence_WhereInputIsInvalid_ThrowsException()
+        {
+            //Assert
+            Assert.Throws<FormatException>(() => SequenceFinder.FindSequence("1 a"));
+        }
+
         [Fact]
         public void FindSequence_Case1()
         {
             //Act
-            var res = SequenceFinder.FindSequence(AssertionConstant.Case11Input); 
+            var res = SequenceFinder.FindSequence(AssertionConstant.Case11Input);
 
             //Assert
             Assert.Equal(AssertionConstant.Case11Output, res);

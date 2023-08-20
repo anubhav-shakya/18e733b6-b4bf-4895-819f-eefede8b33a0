@@ -1,5 +1,4 @@
 # 18e733b6-b4bf-4895-819f-eefede8b33a0
-## About ##
 
 ## Objective
 - Translate a problem into a working solution
@@ -14,5 +13,6 @@
 - Code linting
 - Code coverage reporting
 
-
+### Project Status
+Build : [![.NET](https://github.com/anubhav-shakya/18e733b6-b4bf-4895-819f-eefede8b33a0/actions/workflows/build.yml/badge.svg)](https://github.com/anubhav-shakya/18e733b6-b4bf-4895-819f-eefede8b33a0/actions/workflows/build.yml)
 

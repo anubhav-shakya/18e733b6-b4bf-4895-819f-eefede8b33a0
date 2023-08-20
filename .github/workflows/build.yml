@@ -39,6 +39,12 @@ jobs:
     - name: Test
       id: test
       working-directory: src/CodeTest.UnitTest
-      run: dotnet test CodeTest.UnitTest.csproj --no-build --verbosity normal /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=cobertura
-    - name: Test result
-      run: echo "${{ steps.test.outputs.content }}"
+      run: dotnet test CodeTest.UnitTest.csproj ---logger "trx;LogFileName=test-results.trx" || true
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: DotNET Tests
+        path: "**/test-results.trx"                            
+        reporter: dotnet-trx
+        fail-on-error: true

@@ -38,4 +38,4 @@ jobs:
       working-directory: src/CodeTest
     - name: Test
       working-directory: src/CodeTest.UnitTest
-      run: dotnet test CodeTest.UnitTest.csproj --no-build --verbosity normal 
+      run: dotnet test CodeTest.UnitTest.csproj --no-build --verbosity normal /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=cobertura

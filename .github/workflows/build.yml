@@ -37,14 +37,17 @@ jobs:
       run: dotnet build --no-restore
       working-directory: src/CodeTest
     - name: Test
-      id: test
       working-directory: src/CodeTest.UnitTest
-      run: dotnet test CodeTest.UnitTest.csproj ---logger "trx;LogFileName=test-results.trx" || true
-    - name: Test Report
-      uses: dorny/test-reporter@v1
+      run: dotnet test CodeTest.UnitTest.csproj --no-build --verbosity normal /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=cobertura
+    - name: Generate code coverage Markdown report
+      working-directory: src/CodeTest.UnitTest
+      run: dotnet reportgenerator -reports:**/coverage.cobertura.xml -targetdir:./coverage -reporttypes:MarkdownSummary
+    - name: Create check run with code coverage Markdown report
+      uses: LouisBrunner/checks-action@v1.2.0
       if: always()
       with:
-        name: DotNET Tests
-        path: "**/TestResults/test-results.trx"                            
-        reporter: dotnet-trx
-        fail-on-error: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: Code coverage
+        conclusion: ${{ job.status }}
+        output: '{"summary":"Code coverage"}'
+        output_text_description_file: coverage/Summary.md

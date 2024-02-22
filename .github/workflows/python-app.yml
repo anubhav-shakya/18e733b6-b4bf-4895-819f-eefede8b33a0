@@ -29,5 +29,5 @@ jobs:
         pip install locust
     - name: Run load test
       run: |
-        python -m py locust -f test/load-test.py -H https://www.google.com -u 10 -t 20s --autostart --autoquit 5
+        python locust -f test/load-test.py -H https://www.google.com -u 10 -t 20s --autostart --autoquit 5
 

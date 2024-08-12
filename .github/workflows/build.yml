@@ -16,7 +16,7 @@ jobs:
         uses: pozetroninc/github-action-get-latest-release@v0.7.0
         with:
           repository: ${{ github.repository }}
-          token: ${{ secrets.MY_PAT }}
+          token: ${{ secrets.MY_PAT_1 }}
           excludes: prerelease,draft
     outputs:
       gitref: ${{ steps.latest.outputs.release }}

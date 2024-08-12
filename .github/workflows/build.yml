@@ -3,27 +3,25 @@
 name: .NET
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-        - info
-        - warning
-        - debug
+  release:
+    types:
+      - released
 
 jobs:
-  build:
-
+  get-latest-release:
     runs-on: ubuntu-latest
-
+    steps:
+      - id: latest
+        name: Get Latest Release
+        uses: pozetroninc/github-action-get-latest-release@v0.7.0
+        with:
+          repository: ${{ github.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          excludes: prerelease,draft
+    outputs:
+      gitref: ${{ steps.latest.outputs.release }}
+  build:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
